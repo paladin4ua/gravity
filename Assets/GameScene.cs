@@ -11,25 +11,34 @@ public class GameScene : MonoBehaviour {
     private Projectile projectile = null;
     private Rigidbody2D projectileRB = null;
     private Gate gate = null;
+    private FinishLevelDlg finishLevelDlg = null;
 
     bool startFlight = false;
+
+    bool disableClicks = false;
 
         
     
 
     void OnMouseDown()
     {
+        if (disableClicks)
+        {
+            return;
+        }
+
         var clickPoint = Camera.main.ScreenPointToRay(Input.mousePosition);       
 
 
         projectileRB.velocity = (new Vector2(clickPoint.origin.x, clickPoint.origin.y ) - (Vector2)projectileRB.transform.position) * velocity;
         
         startFlight = true;
+        disableClicks = true;
     }    
 
     T LoadSingleObject<T>()
     {
-        var objects = FindObjectsOfType(typeof(T)) as T[];
+        var objects = Resources.FindObjectsOfTypeAll(typeof(T)) as T[];
 
         Debug.Assert(objects.Length == 1, "On scene should be exactly one " + typeof(T).Name);
 
@@ -46,6 +55,8 @@ public class GameScene : MonoBehaviour {
 
         gate = LoadSingleObject<Gate>();
         gate.parentScene = this;
+
+        finishLevelDlg = LoadSingleObject<FinishLevelDlg>();        
 
     }
 	
@@ -70,6 +81,6 @@ public class GameScene : MonoBehaviour {
 
     public void CompleateLevel(int score)
     {
-
+        finishLevelDlg.ShowSuccess(score);
     }
 }
