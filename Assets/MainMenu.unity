@@ -183,7 +183,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 663453489}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1689524185}
+        m_MethodName: OnStartClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &663453489
@@ -627,6 +638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c080ee88465ea43bacbf0cfcf91785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelsCount: 16
 --- !u!1 &1742408707
 GameObject:
   m_ObjectHideFlags: 0
