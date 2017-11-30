@@ -36,7 +36,7 @@ public class Gate : MonoBehaviour {
         {
             score = 3;
         }
-        if (centerDistance < 0.667)
+        else  if (centerDistance < 0.667)
         {
             score = 2;
         }

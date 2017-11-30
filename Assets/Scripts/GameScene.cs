@@ -12,11 +12,13 @@ public class GameScene : MonoBehaviour {
     private Rigidbody2D projectileRB = null;
     private Gate gate = null;
     private FinishLevelDlg finishLevelDlg = null;
+    private LevelUI levelUI = null;
 
     bool startFlight = false;
 
     bool disableClicks = false;
 
+    float score = 0.0f;
         
     
 
@@ -56,7 +58,9 @@ public class GameScene : MonoBehaviour {
         gate = LoadSingleObject<Gate>();
         gate.parentScene = this;
 
-        finishLevelDlg = LoadSingleObject<FinishLevelDlg>();        
+        finishLevelDlg = LoadSingleObject<FinishLevelDlg>();
+
+        levelUI = LoadSingleObject<LevelUI>();
 
     }
 	
@@ -75,12 +79,27 @@ public class GameScene : MonoBehaviour {
                 force += attractor.charge * projectile.charge / (magnitude * magnitude * magnitude) * r;
             }
 
-            projectileRB.AddForce(force);            
+            projectileRB.AddForce(force);
+            var position = projectileRB.transform.position;
+
+            score += (projectileRB.velocity * Time.deltaTime).magnitude;
+            levelUI.SetScore(Mathf.RoundToInt(score));
+
+            if (Mathf.Abs(position.y) > 6 || Mathf.Abs(position.y) > 12)
+            {
+                startFlight = false;
+                projectileRB.simulated = false;
+                finishLevelDlg.ShowFail();
+            }
+
+
         }
 	}
 
-    public void CompleateLevel(int score)
+    public void CompleateLevel(int stars)
     {
-        finishLevelDlg.ShowSuccess(score);
+        startFlight = false;
+        projectileRB.simulated = false;
+        finishLevelDlg.ShowSuccess(Mathf.RoundToInt(score), stars);   
     }
 }

@@ -11,7 +11,7 @@ public class FinishLevelDlg : MonoBehaviour {
     public Text scoreFld;
 
 
-    public void ShowSuccess(int score)
+    public void ShowSuccess(int score, int stars)
     {
         this.gameObject.SetActive(true);
 
@@ -19,6 +19,16 @@ public class FinishLevelDlg : MonoBehaviour {
         menuBtn.gameObject.SetActive(false);
 
         scoreFld.text = score.ToString();
+    }
+
+    public void ShowFail()
+    {
+        this.gameObject.SetActive(true);
+
+        nextLevelBtn.gameObject.SetActive(false);
+        menuBtn.gameObject.SetActive(true);
+
+        scoreFld.text = "Failed";
     }
 
     public void Retry()

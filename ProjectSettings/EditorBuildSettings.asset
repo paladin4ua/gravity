@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/LevelMenu.unity
     guid: 34fcfa4f034523b4bb253f762b6efe0b
+  - enabled: 1
+    path: Assets/demoScene.unity
+    guid: 985988f6b0a248f40b6a4e7b17db479e
